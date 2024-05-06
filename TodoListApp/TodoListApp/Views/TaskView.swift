@@ -18,20 +18,20 @@ struct TaskView: View {
                     print("Go to edit page")
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
-                }).padding()
+                })
                 
                 VStack(alignment: .leading) {
-                    Text(task.taskDescription).fontWeight(.semibold)
-                    Text("Due: " + task.dueDate)
-                    Text("Created: " + task.createdDate)
-                }
+                    Text(task.taskDescription).font(.system(size: 16, weight: .medium)).padding(0.1)
+                    Text("Due: " + task.dueDate).font(.system(size: 14))
+                    Text("Created: " + task.createdDate).font(.system(size: 14))
+                }.frame(width: 220)
                 
-                Toggle("", isOn: $task.completed).toggleStyle(CheckboxToggleStyle()).foregroundStyle(.black).padding()
+                Toggle("", isOn: $task.completed).toggleStyle(CheckboxToggleStyle()).foregroundStyle(.black)
                 
                 Button(action: {
                     print("Delete task")
                 }, label: {
-                    Image(systemName: "trash.fill").foregroundStyle(.black)
+                    Image("delete")
                 })
             }
         }
@@ -40,5 +40,5 @@ struct TaskView: View {
 }
 
 #Preview {
-    TaskView(task: Task(id: "1234", taskDescription: "Preview Task", createdDate: "May 5, 2024", dueDate: "May 8 2024", completed: false))
+    TaskView(task: Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "February 28 2023", dueDate: "March 8 2023", completed: false))
 }
