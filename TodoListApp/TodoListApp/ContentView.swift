@@ -28,10 +28,13 @@ struct ContentView: View {
                 })
             }
             ScrollView {
-                List(tasks, id: \.id) { task in
-                    TaskView(task: task)
+                VStack {
+                    ForEach(tasks) { task in
+                        TaskView(task: task).padding(.top, 5)
+                    }
                 }
             }
+            
         }
         .padding()
     }
