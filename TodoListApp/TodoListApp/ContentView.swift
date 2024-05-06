@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var tasks: [Task] = []
+    
     var body: some View {
         VStack {
             HStack {
