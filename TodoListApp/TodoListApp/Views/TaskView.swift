@@ -40,5 +40,5 @@ struct TaskView: View {
 }
 
 #Preview {
-    TaskView(task: Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "February 28 2023", dueDate: "March 8 2023", completed: false))
+    TaskView(task: Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "February 28 2023", dueDate: "March 8 2023", completed: true))
 }

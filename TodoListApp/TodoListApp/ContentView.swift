@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tasks: [Task] = []
+    @State private var tasks: [Task] = [Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "February 28 2023", dueDate: "March 8 2023", completed: false), Task(id: "12345", taskDescription: "Walk Dog", createdDate: "February 28 2023", dueDate: "March 8 2023", completed: false)]
     
     var body: some View {
         VStack {
@@ -28,7 +28,9 @@ struct ContentView: View {
                 })
             }
             ScrollView {
-                
+                List(tasks, id: \.id) { task in
+                    TaskView(task: task)
+                }
             }
         }
         .padding()
