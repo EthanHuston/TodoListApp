@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct AddTaskFormView: View {
+    @State private var todoName: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            HStack {
+                Spacer()
+                Text("Create").font(.system(size: 38))
+                Spacer()
+            }
+            Text("To-Do Item Name")
+            TextField("", text: $todoName).background(RoundedRectangle(cornerRadius: 4).foregroundColor(Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)))).padding().frame(width: 332, height: 43)
+            Spacer()
+        }
     }
 }
 

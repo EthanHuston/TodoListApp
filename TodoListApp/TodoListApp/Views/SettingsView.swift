@@ -17,7 +17,7 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             HStack {
                 Spacer()
-                Text("SETTINGS").font(.system(size: 34))
+                Text("Settings").font(.system(size: 34))
                 Spacer()
             }
             
