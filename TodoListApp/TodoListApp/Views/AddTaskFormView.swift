@@ -13,11 +13,11 @@ struct AddTaskFormView: View {
         VStack(alignment: .leading) {
             HStack {
                 Spacer()
-                Text("Create").font(.system(size: 38))
+                Text("Create").font(.system(size: 38)).padding()
                 Spacer()
             }
-            Text("To-Do Item Name")
-            TextField("", text: $todoName).background(RoundedRectangle(cornerRadius: 4).foregroundColor(Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)))).padding().frame(width: 332, height: 43)
+            Text("To-Do Item Name").font(.system(size: 16)).padding(.leading)
+            TextField("", text: $todoName).background(RoundedRectangle(cornerRadius: 4).padding(.horizontal).foregroundColor(Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1))).frame(width: 332, height: 43)).padding(.horizontal).frame(width: 332, height: 43)
             Spacer()
         }
     }
