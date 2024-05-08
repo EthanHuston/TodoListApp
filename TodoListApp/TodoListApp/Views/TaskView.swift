@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct TaskView: View {
     @State var task: Task
     @State private var shouldShowEdit = false
+    private let dateFormatter = DateFormatter()
+    
+    init(task: Task) {
+        self.task = task
+        dateFormatter.dateFormat = "MMM, d, y"
+    }
     
     var body: some View {
         ZStack {
@@ -21,7 +28,7 @@ struct TaskView: View {
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
                 }).fullScreenCover(isPresented: $shouldShowEdit, content: {
-                    EditTaskForm(todoName: task.taskDescription, editing: false,  dueDate: DateFormatter().date(from: task.dueDate) ?? Date(), dismissalBool: $shouldShowEdit)
+                    EditTaskForm(todoName: task.taskDescription, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit)
                 })
                 
                 VStack(alignment: .leading) {

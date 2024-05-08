@@ -31,7 +31,7 @@ struct ContentView: View {
                 }, label: {
                     Image(systemName: "plus.circle.fill").foregroundStyle(.black).font(.system(size: 25))
                 }).fullScreenCover(isPresented: $shouldShowCreate, content: {
-                    AddTaskFormView(dismissalBool: $shouldShowCreate)
+                    AddTaskFormView(dueDate: Date(), dismissalBool: $shouldShowCreate)
                 })
             }
             ScrollView {

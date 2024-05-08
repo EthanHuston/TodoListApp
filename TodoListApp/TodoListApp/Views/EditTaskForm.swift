@@ -10,7 +10,7 @@ import SwiftUI
 struct EditTaskForm: View {
     @State  var todoName: String = ""
     @State  var editing = false
-    @State  var dueDate = Date.now
+    @State  var dueDate: Date
     @Binding var dismissalBool: Bool
     
     
@@ -29,7 +29,7 @@ struct EditTaskForm: View {
             }.textFieldStyle(CustomTextFieldStyle(focused: $editing))
             
             Text("Select Due Date").font(.system(size: 16)).padding(.leading, 30)
-            CustomDatePicker()
+            CustomDatePicker(selectedDate: dueDate)
             
             HStack {
                 Spacer()

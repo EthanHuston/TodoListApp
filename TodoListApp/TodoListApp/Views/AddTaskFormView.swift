@@ -10,7 +10,7 @@ import SwiftUI
 struct AddTaskFormView: View {
     @State private var todoName: String = ""
     @State private var editing = false
-    @State private var dueDate = Date.now
+    @State var dueDate: Date
     @Binding var dismissalBool: Bool
     
     
@@ -31,7 +31,7 @@ struct AddTaskFormView: View {
             Text("Select Due Date").font(.system(size: 16)).padding(.leading, 30)
             
             //DatePicker("Select Due Date", selection: $dueDate, displayedComponents: .date).labelsHidden()
-            CustomDatePicker()
+            CustomDatePicker(selectedDate: dueDate)
             
             HStack {
                 Spacer()
@@ -68,7 +68,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
 
 struct CustomDatePicker: View {
     @State private var showPicker = false
-    @State private var selectedDate = Date()
+    @State var selectedDate: Date
     private let grayColor = Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1))
 
     var body: some View {
