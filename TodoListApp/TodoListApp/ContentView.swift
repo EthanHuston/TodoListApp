@@ -27,9 +27,11 @@ struct ContentView: View {
                 Text("Task List").font(.system(size: 25))
                 Spacer()
                 Button(action: {
-                    print("Adding Task")
+                    shouldShowCreate.toggle()
                 }, label: {
                     Image(systemName: "plus.circle.fill").foregroundStyle(.black).font(.system(size: 25))
+                }).fullScreenCover(isPresented: $shouldShowCreate, content: {
+                    AddTaskFormView(dismissalBool: $shouldShowCreate)
                 })
             }
             ScrollView {
