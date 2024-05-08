@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EditTaskForm: View {
-    @State private var todoName: String = ""
-    @State private var editing = false
-    @State private var dueDate = Date.now
-    //@Binding var dismissalBool: Bool
+    @State  var todoName: String = ""
+    @State  var editing = false
+    @State  var dueDate = Date.now
+    @Binding var dismissalBool: Bool
     
     
     var body: some View {
@@ -35,7 +35,7 @@ struct EditTaskForm: View {
                 Spacer()
                 Button(action: {
                     print("Save Settings")
-                   // dismissalBool = false
+                    dismissalBool = false
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4).foregroundStyle(.black).frame(width: 80, height: 40)
@@ -50,6 +50,6 @@ struct EditTaskForm: View {
     }
 }
 
-#Preview {
-    EditTaskForm()
-}
+//#Preview {
+//    EditTaskForm()
+//}

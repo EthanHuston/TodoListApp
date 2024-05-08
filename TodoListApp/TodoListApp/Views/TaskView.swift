@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskView: View {
     @State var task: Task
+    @State private var shouldShowEdit = false
     
     var body: some View {
         ZStack {
@@ -16,8 +17,11 @@ struct TaskView: View {
             HStack {
                 Button(action: {
                     print("Go to edit page")
+                    shouldShowEdit.toggle()
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
+                }).fullScreenCover(isPresented: $shouldShowEdit, content: {
+                    EditTaskForm(todoName: task.taskDescription, editing: false,  dueDate: DateFormatter().date(from: task.dueDate) ?? Date(), dismissalBool: $shouldShowEdit)
                 })
                 
                 VStack(alignment: .leading) {
