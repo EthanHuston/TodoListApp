@@ -20,7 +20,7 @@ struct ContentView: View {
                     shouldShowSettings.toggle()
                 }, label: {
                     Image(systemName: "gearshape.fill").foregroundStyle(.black).font(.system(size: 25))
-                }).fullScreenCover(isPresented: $shouldShowSettings, content: {
+                }).fullScreenCover(isPresented: $shouldShowSettings, onDismiss: reloadPage, content: {
                     SettingsView(dismissalBool: $shouldShowSettings)
                 })
                 Spacer()
@@ -48,6 +48,13 @@ struct ContentView: View {
                 self.tasks = result ?? []
             }
         })
+    }
+    
+    func reloadPage() {
+        print("Sending request")
+        Services.shared.fetchTasks { (result) in
+            self.tasks = result ?? []
+        }
     }
 }
 

@@ -19,7 +19,6 @@ class Services {
     private init() {}
 
     func fetchTasks(completion: @escaping ([Task]?) -> Void) {
-        let url = baseURL.appendingPathComponent("/tasks")
         
         var components = URLComponents(url: baseURL.appendingPathComponent("/tasks"), resolvingAgainstBaseURL: true)
         var queryItems = [URLQueryItem]()
@@ -44,6 +43,14 @@ class Services {
             } else {
                 queryItems.append(URLQueryItem(name: "sort_by", value: "-createdDate"))
             }
+        }
+        
+        components?.queryItems = queryItems
+        
+        guard let url = components?.url else {
+            print("Invalid URL")
+            completion(nil)
+            return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var selectedFilter: filterOptions? = .all
-    @State private var selectedSortBy: sortByOptions? = .due
-    @State private var selectedSortDir: sortDirectionOptions? = .ascending
+    @State private var selectedFilter: filterOptions? = Services.shared.filterSetting
+    @State private var selectedSortBy: sortByOptions? = Services.shared.sortBySetting
+    @State private var selectedSortDir: sortDirectionOptions? = Services.shared.sortDirectionSetting
     @Binding var dismissalBool: Bool
     
     var body: some View {
@@ -43,6 +43,11 @@ struct SettingsView: View {
                 Spacer()
                 Button(action: {
                     print("Save Settings")
+                    
+                    Services.shared.filterSetting = selectedFilter!
+                    Services.shared.sortBySetting = selectedSortBy!
+                    Services.shared.sortDirectionSetting = selectedSortDir!
+                    
                     dismissalBool = false
                 }, label: {
                     ZStack {
