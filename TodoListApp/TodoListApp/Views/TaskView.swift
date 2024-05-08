@@ -11,11 +11,15 @@ import Foundation
 struct TaskView: View {
     @State var task: Task
     @State private var shouldShowEdit = false
+    var reloadMainPage: () -> Void
+    var deleteTask: (Task) -> Void
     private let dateFormatter = DateFormatter()
     
-    init(task: Task) {
+    init(task: Task, reloadMainPage: @escaping () -> Void, deleteTask: @escaping (Task) -> Void) {
         self.task = task
         dateFormatter.dateFormat = "MMM, d, y"
+        self.reloadMainPage = reloadMainPage
+        self.deleteTask = deleteTask
     }
     
     var body: some View {
@@ -27,8 +31,8 @@ struct TaskView: View {
                     shouldShowEdit.toggle()
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
-                }).fullScreenCover(isPresented: $shouldShowEdit, content: {
-                    EditTaskForm(todoName: task.taskDescription, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit)
+                }).fullScreenCover(isPresented: $shouldShowEdit, onDismiss: reloadMainPage, content: {
+                    EditTaskForm(task: task, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit)
                 })
                 
                 VStack(alignment: .leading) {
@@ -40,16 +44,24 @@ struct TaskView: View {
                 Toggle("", isOn: $task.completed).toggleStyle(CheckboxToggleStyle()).foregroundStyle(.black)
                 
                 Button(action: {
-                    print("Delete task")
+                    
+                    deleteTask(task)
+                    Services.shared.deleteTask(taskId: task.id) { result in
+                        
+                    }
                 }, label: {
                     Image("delete")
                 })
+            }
+        }.onChange(of: task.completed) { oldValue, newValue in
+            Services.shared.updateTask(task: task) { updatedTask in
+                reloadMainPage()
             }
         }
         
     }
 }
 
-#Preview {
-    TaskView(task: Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "createdDate", dueDate: "dueDate", completed: true))
-}
+//#Preview {
+//    TaskView(task: Task(id: "1234", taskDescription: "Grocery Shopping", createdDate: "createdDate", dueDate: "dueDate", completed: true))
+//}

@@ -37,8 +37,9 @@ struct AddTaskFormView: View {
                 Button(action: {
                     print("Save Settings")
                     Services.shared.createTask(taskDescription: todoName, dueDate: dueDate.formatted(.dateTime.day().month().year()), completed: false) {  newTask in
+                        dismissalBool = false
                     }
-                    dismissalBool = false
+                    
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4).foregroundStyle(.black).frame(width: 80, height: 40)

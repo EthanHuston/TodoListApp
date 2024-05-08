@@ -105,4 +105,66 @@ class Services {
             }
         }.resume()
     }
+    
+    //Update a task
+    func updateTask(task: Task, completion: @escaping (Task?) -> Void) {
+        
+        let url = baseURL.appendingPathComponent("/tasks/\(task.id)")
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let updatedTask = Task(id: task.id, taskDescription: task.taskDescription, createdDate: task.createdDate, dueDate: task.dueDate, completed: task.completed)
+        guard let jsonData = try? JSONEncoder().encode(updatedTask) else {
+            print("Failed to encode task")
+            completion(nil)
+            return
+        }
+        
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let updatedTask = try JSONDecoder().decode(Task.self, from: data)
+                completion(updatedTask)
+            } catch {
+                print("Failed to decode response: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    //Delete a task
+    func deleteTask(taskId: String, completion: @escaping (Bool) -> Void) {
+        let url = baseURL.appendingPathComponent("/tasks/\(taskId)")
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error deleting the task: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                completion(false)
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                completion(true)
+            } else {
+                print("Unex[ected status code: \(httpResponse.statusCode)")
+                completion(false)
+            }
+        }
+    }
 }

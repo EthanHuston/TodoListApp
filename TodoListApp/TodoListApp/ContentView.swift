@@ -37,7 +37,7 @@ struct ContentView: View {
             ScrollView {
                 VStack {
                     ForEach(tasks) { task in
-                        TaskView(task: task).padding(.top, 5)
+                        TaskView(task: task, reloadMainPage: reloadPage, deleteTask: removeTask).padding(.top, 5)
                     }
                 }
             }
@@ -51,10 +51,18 @@ struct ContentView: View {
     }
     
     func reloadPage() {
-        print("Sending request")
         Services.shared.fetchTasks { (result) in
+            self.tasks.removeAll()
             self.tasks = result ?? []
         }
+    }
+    func removeTask(task: Task) {
+        withAnimation(.default) {
+            self.tasks.remove(at: self.tasks.firstIndex(where: { taskToCheck in
+                taskToCheck.id == task.id
+            })!)
+        }
+       
     }
 }
 
