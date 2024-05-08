@@ -27,12 +27,11 @@ struct TaskView: View {
             RoundedRectangle(cornerRadius: 5).foregroundStyle(Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1))).frame(width: 358, height: 90)
             HStack {
                 Button(action: {
-                    print("Go to edit page")
                     shouldShowEdit.toggle()
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
-                }).fullScreenCover(isPresented: $shouldShowEdit, onDismiss: reloadMainPage, content: {
-                    EditTaskForm(task: task, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit)
+                }).fullScreenCover(isPresented: $shouldShowEdit, content: {
+                    EditTaskForm(task: task, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit, reloadMainPage: reloadMainPage)
                 })
                 
                 VStack(alignment: .leading) {
@@ -44,11 +43,11 @@ struct TaskView: View {
                 Toggle("", isOn: $task.completed).toggleStyle(CheckboxToggleStyle()).foregroundStyle(.black)
                 
                 Button(action: {
-                    
-                    deleteTask(task)
-                    Services.shared.deleteTask(taskId: task.id) { result in
-                        
+                    Services.shared.deleteTask(task: task) { result in
+                        deleteTask(task)
                     }
+                    
+                    
                 }, label: {
                     Image("delete")
                 })

@@ -42,7 +42,6 @@ struct SettingsView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    print("Save Settings")
                     
                     Services.shared.filterSetting = selectedFilter!
                     Services.shared.sortBySetting = selectedSortBy!

@@ -35,7 +35,6 @@ struct AddTaskFormView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    print("Save Settings")
                     Services.shared.createTask(taskDescription: todoName, dueDate: dueDate.formatted(.dateTime.day().month().year()), completed: false) {  newTask in
                         dismissalBool = false
                     }

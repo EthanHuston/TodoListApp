@@ -141,8 +141,8 @@ class Services {
     }
     
     //Delete a task
-    func deleteTask(taskId: String, completion: @escaping (Bool) -> Void) {
-        let url = baseURL.appendingPathComponent("/tasks/\(taskId)")
+    func deleteTask(task: Task, completion: @escaping (Bool) -> Void) {
+        let url = baseURL.appendingPathComponent("/tasks/\(task.id)")
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
@@ -162,9 +162,9 @@ class Services {
             if httpResponse.statusCode == 200 {
                 completion(true)
             } else {
-                print("Unex[ected status code: \(httpResponse.statusCode)")
+                print("Unexpected status code: \(httpResponse.statusCode)")
                 completion(false)
             }
-        }
+        }.resume()
     }
 }
