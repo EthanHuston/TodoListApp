@@ -30,7 +30,7 @@ struct ContentView: View {
                     shouldShowCreate.toggle()
                 }, label: {
                     Image(systemName: "plus.circle.fill").foregroundStyle(.black).font(.system(size: 25))
-                }).fullScreenCover(isPresented: $shouldShowCreate, content: {
+                }).fullScreenCover(isPresented: $shouldShowCreate, onDismiss: reloadPage, content: {
                     AddTaskFormView(dueDate: Date(), dismissalBool: $shouldShowCreate)
                 })
             }

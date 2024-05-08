@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D75798E82BEBE09500A7A368 /* EditTaskForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75798E72BEBE09500A7A368 /* EditTaskForm.swift */; };
+		D75798EA2BEC00BA00A7A368 /* TaskForPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75798E92BEC00BA00A7A368 /* TaskForPost.swift */; };
 		D78C57C22BEAAFB0005A2A1E /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C57C12BEAAFB0005A2A1E /* Services.swift */; };
 		D78C57C42BEAB588005A2A1E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C57C32BEAB588005A2A1E /* SettingsView.swift */; };
 		D78C57C72BEAB7A2005A2A1E /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C57C62BEAB7A2005A2A1E /* RadioButton.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		D75798E72BEBE09500A7A368 /* EditTaskForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskForm.swift; sourceTree = "<group>"; };
+		D75798E92BEC00BA00A7A368 /* TaskForPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskForPost.swift; sourceTree = "<group>"; };
 		D78C57C12BEAAFB0005A2A1E /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		D78C57C32BEAB588005A2A1E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D78C57C62BEAB7A2005A2A1E /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				D7C029462BE97B5B0034133E /* Task.swift */,
+				D75798E92BEC00BA00A7A368 /* TaskForPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				D78C57C92BEAC113005A2A1E /* AddTaskFormView.swift in Sources */,
 				D7C029492BE97B8A0034133E /* TaskView.swift in Sources */,
 				D78C57C72BEAB7A2005A2A1E /* RadioButton.swift in Sources */,
+				D75798EA2BEC00BA00A7A368 /* TaskForPost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,13 +30,14 @@ struct AddTaskFormView: View {
             
             Text("Select Due Date").font(.system(size: 16)).padding(.leading, 30)
             
-            //DatePicker("Select Due Date", selection: $dueDate, displayedComponents: .date).labelsHidden()
-            CustomDatePicker(selectedDate: dueDate)
+            CustomDatePicker(selectedDate: $dueDate)
             
             HStack {
                 Spacer()
                 Button(action: {
                     print("Save Settings")
+                    Services.shared.createTask(taskDescription: todoName, dueDate: dueDate.formatted(.dateTime.day().month().year()), completed: false) {  newTask in
+                    }
                     dismissalBool = false
                 }, label: {
                     ZStack {
@@ -68,7 +69,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
 
 struct CustomDatePicker: View {
     @State private var showPicker = false
-    @State var selectedDate: Date
+    @Binding var selectedDate: Date
     private let grayColor = Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1))
 
     var body: some View {

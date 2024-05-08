@@ -18,6 +18,8 @@ class Services {
 
     private init() {}
 
+    
+    //Fetch All tasks. Utilizes current settings to retrieve correct set of tasks
     func fetchTasks(completion: @escaping ([Task]?) -> Void) {
         
         var components = URLComponents(url: baseURL.appendingPathComponent("/tasks"), resolvingAgainstBaseURL: true)
@@ -69,6 +71,38 @@ class Services {
             }
         }.resume()
     }
-
-    // Add other API methods here (e.g., createTask, updateTask, deleteTask)
+    
+    //Create task function for adding tasks
+    func createTask(taskDescription: String, dueDate: String, completed: Bool, completion: @escaping (Task?) -> Void) {
+        
+        let url = baseURL.appendingPathComponent("/tasks")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let newTask = TaskForPost(id: UUID().uuidString, taskDescription: taskDescription, dueDate: dueDate, completed: completed)
+        guard let jsonData = try? JSONEncoder().encode(newTask) else {
+            print("Failed to encode new task")
+            completion(nil)
+            return
+        }
+        
+        request.httpBody = jsonData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let createdTask = try JSONDecoder().decode(Task.self, from: data)
+                completion(createdTask)
+            } catch {
+                print("Failed to decode return data: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }.resume()
+    }
 }

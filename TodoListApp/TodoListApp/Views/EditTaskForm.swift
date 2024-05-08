@@ -29,7 +29,7 @@ struct EditTaskForm: View {
             }.textFieldStyle(CustomTextFieldStyle(focused: $editing))
             
             Text("Select Due Date").font(.system(size: 16)).padding(.leading, 30)
-            CustomDatePicker(selectedDate: dueDate)
+            CustomDatePicker(selectedDate: $dueDate)
             
             HStack {
                 Spacer()
