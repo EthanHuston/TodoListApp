@@ -31,7 +31,7 @@ struct TaskView: View {
                 }, label: {
                     Image("editPen").foregroundStyle(.black).font(.system(size: 30))
                 }).fullScreenCover(isPresented: $shouldShowEdit, content: {
-                    EditTaskForm(task: task, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit, reloadMainPage: reloadMainPage)
+                    EditTaskForm(task: $task, editing: false,  dueDate: dateFormatter.date(from: task.dueDate) ?? Calendar.current.date(byAdding: .day, value: 4, to: Date())!, dismissalBool: $shouldShowEdit, reloadMainPage: reloadMainPage)
                 })
                 
                 VStack(alignment: .leading) {

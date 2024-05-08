@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditTaskForm: View {
-    @State var task: Task
+    @Binding var task: Task
     @State  var editing = false
     @State  var dueDate: Date
     @Binding var dismissalBool: Bool
@@ -38,9 +38,11 @@ struct EditTaskForm: View {
                 Button(action: {
                     task.dueDate = dueDate.formatted(.dateTime.day().month().year())
                     Services.shared.updateTask(task: task) { updatedTask in
-                        reloadMainPage()
                         dismissalBool = false
+                        reloadMainPage()
                     }
+                    
+                    
                     
                 }, label: {
                     ZStack {
