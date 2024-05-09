@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+//Settings page
 struct SettingsView: View {
+    
     @State private var selectedFilter: filterOptions? = Services.shared.filterSetting
     @State private var selectedSortBy: sortByOptions? = Services.shared.sortBySetting
     @State private var selectedSortDir: sortDirectionOptions? = Services.shared.sortDirectionSetting
@@ -42,7 +44,7 @@ struct SettingsView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    
+                    //Set correct settings in singleton class for api calls
                     Services.shared.filterSetting = selectedFilter!
                     Services.shared.sortBySetting = selectedSortBy!
                     Services.shared.sortDirectionSetting = selectedSortDir!
@@ -62,6 +64,7 @@ struct SettingsView: View {
     }
 }
 
+// Enums for differentiating settings states
 enum filterOptions {
     case all
     case complete

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+//Struct for decoding and encoding a Task
 struct Task: Codable, Identifiable {
     let id: String
     var taskDescription: String

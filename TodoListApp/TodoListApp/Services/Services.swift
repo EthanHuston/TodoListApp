@@ -7,7 +7,9 @@
 
 import Foundation
 
+//Singleton API Services class
 class Services {
+    //Initialize singleton
     static let shared = Services()
 
     private let baseURL = URL(string: "http://localhost:3000")!
@@ -25,6 +27,7 @@ class Services {
         var components = URLComponents(url: baseURL.appendingPathComponent("/tasks"), resolvingAgainstBaseURL: true)
         var queryItems = [URLQueryItem]()
         
+        //Apply proper filter if needed
         if filterSetting != .all {
             if filterSetting == .complete {
                 queryItems.append(URLQueryItem(name: "completed", value: "true"))
@@ -33,6 +36,7 @@ class Services {
             }
         }
         
+        //Apply proper sorting
         if sortBySetting == .due {
             if sortDirectionSetting == .ascending {
                 queryItems.append(URLQueryItem(name: "sort_by", value: "+dueDate"))
@@ -47,6 +51,7 @@ class Services {
             }
         }
         
+        //Assemble api call and send
         components?.queryItems = queryItems
         
         guard let url = components?.url else {
@@ -61,7 +66,7 @@ class Services {
                 completion(nil)
                 return
             }
-
+            
             do {
                 let tasks = try JSONDecoder().decode([Task].self, from: data)
                 completion(tasks)

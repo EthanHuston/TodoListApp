@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Custom Radio Button class
 struct RadioButton: View {
     @Binding private var isSelected: Bool
     private let label: String

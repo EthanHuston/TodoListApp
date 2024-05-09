@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//Edit task form, identical to add task form with adjustments for editing instead of creating.
+//With more extended work time, potentially combine the two.
 struct EditTaskForm: View {
     @Binding var task: Task
     @State  var editing = false
@@ -32,7 +34,7 @@ struct EditTaskForm: View {
             
             Text("Select Due Date").font(.system(size: 16)).padding(.leading, 30)
             CustomDatePicker(selectedDate: $dueDate)
-            
+        
             HStack {
                 Spacer()
                 Button(action: {
@@ -41,15 +43,11 @@ struct EditTaskForm: View {
                         dismissalBool = false
                         reloadMainPage()
                     }
-                    
-                    
-                    
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 4).foregroundStyle(.black).frame(width: 80, height: 40)
                         Text("Save").foregroundStyle(.white)
                     }
-                    
                 })
                 Spacer()
             }.padding(40)

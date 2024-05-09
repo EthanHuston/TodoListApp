@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Add task form
 struct AddTaskFormView: View {
     @State private var todoName: String = ""
     @State private var editing = false
@@ -53,6 +54,7 @@ struct AddTaskFormView: View {
     }
 }
 
+//Custom text field style for correct collor and focused highlighting
 struct CustomTextFieldStyle: TextFieldStyle {
     @Binding var focused: Bool
     private let grayColor = Color(uiColor: UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1))
@@ -67,6 +69,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
     }
 }
 
+//Custom date picker that looks similar to textfield. A bit hacky, but works
 struct CustomDatePicker: View {
     @State private var showPicker = false
     @Binding var selectedDate: Date

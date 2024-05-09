@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Struct for encoding a task that is being added request body is different than result body.
 struct TaskForPost: Codable, Identifiable {
     var id: String
     var taskDescription: String
